@@ -8,7 +8,7 @@ variable "A_project_name" {
 }
 
 variable "instance_count" {
-  default = "2"
+  default = "4"
 }
 
 resource "aws_instance" "DEVOPS" {
@@ -19,7 +19,8 @@ resource "aws_instance" "DEVOPS" {
   associate_public_ip_address = true
   instance_type = "t2.large"
   tags = {
-    Name = var.A_project_name
+    Name  = "Terraform-${count.index + 1}"
+    Batch = "5AM"
   }
   user_data = <<-EOF
         #!/bin/bash
@@ -31,7 +32,7 @@ resource "aws_instance" "DEVOPS" {
         EOF
 }
 
-resource "aws_eip" "DEVOPS" {
+/* resource "aws_eip" "DEVOPS" {
   instance = aws_instance.DEVOPS.id
   vpc      = true
 
@@ -48,7 +49,7 @@ resource "aws_eip" "DEVOPS" {
 resource "aws_eip_association" "DEVOPS" {
   instance_id   = aws_instance.DEVOPS.id
   allocation_id = aws_eip.DEVOPS.id
-}
+} */
 
 resource "aws_security_group" "DEVOPS" {
   name = var.A_project_name
@@ -249,7 +250,7 @@ resource "aws_lb_target_group_attachment" "MINIKUBE" {
 
 
 output "public_ip_EC2" {
-  value       = aws_instance.DEVOPS.public_ip
+  value       = aws_instance.DEVOPS.*.public_ip
   description = "The public IP EC2 server"
 }
 
