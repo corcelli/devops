@@ -7,8 +7,13 @@ variable "A_project_name" {
   type        = string
 }
 
+variable "instance_count" {
+  default = "2"
+}
+
 resource "aws_instance" "DEVOPS" {
   ami           = "ami-0229f9a2f1b77bc37"
+  count         = var.instance_count
   key_name = "Keys_DockerServerFastDeliveryAWS"
   vpc_security_group_ids = ["${aws_security_group.DEVOPS.id}"]
   associate_public_ip_address = true
