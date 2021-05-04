@@ -35,6 +35,7 @@ resource "aws_instance" "DEVOPS" {
         EOF
 }
 
+
 /* resource "aws_eip" "DEVOPS" {
   instance = aws_instance.DEVOPS.id
   vpc      = true
