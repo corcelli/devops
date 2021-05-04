@@ -1,7 +1,7 @@
 #!/bin/bash
 apt-get remove docker docker-engine docker.io containerd runc -y
 apt-get install apt-transport-https ca-certificates curl  gnupg lsb-release -y
-curl https://releases.rancher.com/install-docker/19.03.sh | sh
+curl https://releases.rancher.com/install-docker/20.10.sh | sh
 curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
