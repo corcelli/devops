@@ -18,6 +18,9 @@ resource "aws_instance" "DEVOPS" {
   vpc_security_group_ids = ["${aws_security_group.DEVOPS.id}"]
   associate_public_ip_address = true
   instance_type = "t2.large"
+  root_block_device {
+    volume_size = "110"
+  }
   tags = {
     Name  = "Terraform-${count.index + 1}"
     Batch = "5AM"
